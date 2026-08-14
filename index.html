@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatoly Larkin — Sound &amp; Score Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171f;
+    --ink-2:#1c202b;
+    --paper:#f2ecdd;
+    --paper-dim:#cfc7ae;
+    --amber:#e8a33d;
+    --rust:#b5483b;
+    --teal:#4c8b83;
+    --line:#333a4a;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Hero / signature wave-to-staff ---------- */
+
+  .hero{
+    padding:72px 0 8px;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin:0 0 22px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:500;
+    font-size:clamp(34px, 6vw, 52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+    color:var(--paper);
+  }
+
+  .sub{
+    font-size:16px;
+    line-height:1.6;
+    color:var(--paper-dim);
+    max-width:46ch;
+    margin:0 0 40px;
+  }
+
+  .staff-svg{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+  }
+
+  .wave-path{
+    fill:none;
+    stroke:var(--amber);
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 1.8s ease-out forwards;
+  }
+
+  .staff-line{
+    stroke:var(--line);
+    stroke-width:1;
+    opacity:0;
+    animation:fade-in 0.6s ease-out forwards;
+  }
+  .staff-line:nth-of-type(1){animation-delay:1.5s;}
+  .staff-line:nth-of-type(2){animation-delay:1.58s;}
+  .staff-line:nth-of-type(3){animation-delay:1.66s;}
+  .staff-line:nth-of-type(4){animation-delay:1.74s;}
+  .staff-line:nth-of-type(5){animation-delay:1.82s;}
+
+  @keyframes draw{
+    to{stroke-dashoffset:0;}
+  }
+  @keyframes fade-in{
+    to{opacity:1;}
+  }
+
+  /* ---------- Project cards ---------- */
+
+  main{padding:12px 0 64px;}
+
+  .panel{
+    border:1px solid var(--line);
+    background:var(--ink-2);
+    border-radius:3px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+
+  .panel-link{
+    display:block;
+    text-decoration:none;
+    padding:26px 28px 24px;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .panel-link:hover, .panel-link:focus-visible{
+    background:#20242f;
+  }
+  .panel:hover{border-color:#4a5268;}
+
+  .panel-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:10px;
+  }
+
+  .panel-index{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    letter-spacing:0.04em;
+  }
+
+  .panel-title{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:23px;
+    color:var(--paper);
+    margin:0;
+  }
+
+  .panel-desc{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--paper-dim);
+    margin:0 0 16px;
+    max-width:52ch;
+  }
+
+  .panel-foot{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--amber);
+  }
+
+  .arrow{
+    transition:transform 0.15s ease;
+    display:inline-block;
+  }
+  .panel-link:hover .arrow{transform:translateX(3px);}
+
+  .tag-dot{
+    width:6px;height:6px;border-radius:50%;
+    display:inline-block;
+    margin-right:6px;
+  }
+  .tag-dot.teal{background:var(--teal);}
+  .tag-dot.rust{background:var(--rust);}
+
+  footer{
+    padding:0 0 48px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    border-top:1px solid var(--line);
+    padding-top:20px;
+  }
+
+  footer a{color:var(--paper-dim); text-decoration:underline; text-underline-offset:3px;}
+  footer a:hover{color:var(--amber);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <p class="eyebrow">Anatoly Larkin — web tools</p>
+    <h1>Sound, tuned by hand.<br>Score, checked by rule.</h1>
+    <p class="sub">Two small instruments for working with music in the browser — one for building tones out of raw sine waves, one for checking a score against the rules of counterpoint.</p>
+
+    <svg class="staff-svg" viewBox="0 0 700 90" preserveAspectRatio="none" aria-hidden="true">
+      <path class="wave-path" d="M0,45 C 20,10 40,10 60,45 C 80,80 100,80 120,45 C 140,10 160,10 180,45 C 200,80 220,80 240,45 C 260,10 280,10 300,45 C 320,80 340,80 360,45 C 380,10 400,10 420,45 C 440,80 460,80 480,45 C 500,10 520,10 540,45 C 560,80 580,80 600,45 C 620,10 640,10 660,45 C 680,65 690,55 700,45"/>
+      <line class="staff-line" x1="0" y1="15" x2="700" y2="15"/>
+      <line class="staff-line" x1="0" y1="30" x2="700" y2="30"/>
+      <line class="staff-line" x1="0" y1="45" x2="700" y2="45"/>
+      <line class="staff-line" x1="0" y1="60" x2="700" y2="60"/>
+      <line class="staff-line" x1="0" y1="75" x2="700" y2="75"/>
+    </svg>
+  </div>
+
+  <main>
+
+    <div class="panel">
+      <a class="panel-link" href="https://anatoly-larkin.github.io/sinewaves">
+        <div class="panel-top">
+          <h2 class="panel-title">Tones From Sinewaves</h2>
+          <span class="panel-index">01</span>
+        </div>
+        <p class="panel-desc">Stack individual sine waves to build a tone, watch the combined waveform in real time, and export what you've made.</p>
+        <div class="panel-foot"><span class="tag-dot teal"></span>sinewaves <span class="arrow">→</span></div>
+      </a>
+    </div>
+
+    <div class="panel">
+      <a class="panel-link" href="https://anatoly-larkin.github.io/CounterpointRuler">
+        <div class="panel-top">
+          <h2 class="panel-title">Counterpoint Ruler</h2>
+          <span class="panel-index">02</span>
+        </div>
+        <p class="panel-desc">Upload a two-staff MusicXML score and check its voice contour, counterpoint, and canon imitation against configurable rules.</p>
+        <div class="panel-foot"><span class="tag-dot rust"></span>counterpointruler <span class="arrow">→</span></div>
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    built and hosted on GitHub Pages · <a href="https://github.com/anatoly-larkin">github.com/anatoly-larkin</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
